@@ -31,18 +31,22 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required|min:6',
+            'name' => 'required|string|max:255',
+            'surname' => 'nullable|string|max:255',
+            'email' => 'required|email|unique:users',
+            'whatsapp' => 'nullable|string|max:20',
+            'password' => 'required|string|min:6|confirmed',
         ]);
 
         User::create([
             'name' => $request->name,
+            'surname' => $request->surname,
             'email' => $request->email,
+            'whatsapp' => $request->whatsapp,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'Conta criada com sucesso!');
     }
 
     public function logout()

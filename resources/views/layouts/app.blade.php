@@ -8,7 +8,7 @@
     <!-- Loader CSS -->
     <style>
         .loader {
-            width: fit-content;
+            width: 100vw;
             height: 100vh;
             display: flex;
             align-items: center;
@@ -32,7 +32,6 @@
 
         .truckBody {
             width: 130px;
-            height: fit-content;
             margin-bottom: 6px;
             animation: motion 1s linear infinite;
         }
@@ -45,11 +44,10 @@
 
         .truckTires {
             width: 130px;
-            height: fit-content;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0px 10px 0px 15px;
+            padding: 0 10px 0 15px;
             position: absolute;
             bottom: 0;
         }
@@ -108,24 +106,18 @@
 </head>
 <body>
     <!-- Loader -->
-    <div id="loader" class="loader">
-        <!-- Cole aqui o HTML completo do caminhão que o cliente te mandou -->
+    <div id="loader" class="loader" style="display: none;">
         {!! file_get_contents(resource_path('views/components/loader-truck.html')) !!}
     </div>
 
     <!-- Conteúdo principal -->
-    <div id="app-content" style="display: none;">
+    <div id="app-content">
         <div class="container mt-4">
             @yield('content')
         </div>
     </div>
 
-    <!-- Script para esconder loader -->
-    <script>
-        window.addEventListener('load', function () {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('app-content').style.display = 'block';
-        });
-    </script>
+    <!-- Scripts globais -->
+    @stack('scripts')
 </body>
 </html>
