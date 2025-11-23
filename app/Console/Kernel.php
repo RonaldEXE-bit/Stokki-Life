@@ -8,15 +8,16 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * Define the application's command schedule.
+     * Define o agendamento dos comandos da aplicação.
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // Executa diariamente a limpeza de clientes inativos (sem compras há 30 dias)
+        $schedule->command('clients:prune-inactive')->daily();
     }
 
     /**
-     * Register the commands for the application.
+     * Registra os comandos da aplicação.
      */
     protected function commands(): void
     {
