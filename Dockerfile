@@ -22,7 +22,10 @@ COPY . .
 # Instalar dependências Laravel
 RUN composer install --no-dev --optimize-autoloader
 
-# Gerar chave da aplicação (vai usar variáveis do Render)
+# Garantir que exista um .env para o build
+RUN cp .env.example .env
+
+# Gerar chave da aplicação
 RUN php artisan key:generate
 
 # Build front-end (se tiver assets)
