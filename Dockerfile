@@ -5,12 +5,10 @@ FROM php:8.2-cli
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
-    default-mysql-client \
+    libpq-dev \
     nodejs \
     npm \
     && docker-php-ext-install pdo pdo_pgsql
-
-
 
 # Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -24,10 +22,7 @@ COPY . .
 # Instalar dependências Laravel
 RUN composer install --no-dev --optimize-autoloader
 
-# Garantir que exista um .env para o build
-RUN cp .env.example .env
-
-# Gerar chave da aplicação
+# Gerar chave da aplicação (vai usar variáveis do Render)
 RUN php artisan key:generate
 
 # Build front-end (se tiver assets)
