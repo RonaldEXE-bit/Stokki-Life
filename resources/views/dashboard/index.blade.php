@@ -26,12 +26,7 @@
     </style>
     <link rel="icon" type="image/jpeg" href="{{ asset('images/icon.png') }}">
 </head>
-@extends('layouts.app')
 
-@section('content')
-    <h1>Minhas Contas</h1>
-    <!-- conteúdo da página -->
-@endsection
 
 <body class="bg-stokki-gray-light font-sans antialiased">
     <header class="bg-white border-b border-stokki-gray-border shadow-sm sticky top-0 z-10">
