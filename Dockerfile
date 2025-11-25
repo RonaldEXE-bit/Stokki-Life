@@ -1,7 +1,7 @@
 # Usar imagem base com PHP 8.2
 FROM php:8.2-cli
 
-# Instalar dependências do sistema
+# Instalar dependências do sistema e extensões necessárias
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
@@ -31,8 +31,12 @@ RUN php artisan key:generate
 # Build front-end (se tiver assets)
 RUN npm install && npm run build
 
+# Copiar script de inicialização
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Expor porta
 EXPOSE 8080
 
 # Comando de inicialização
-CMD php artisan serve --host=0.0.0.0 --port=8080
+CMD ["/entrypoint.sh"]
