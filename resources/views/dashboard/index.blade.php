@@ -97,15 +97,11 @@
                 <i data-lucide="package" class="w-6 h-6 text-stokki-green"></i>
                 <span class="text-stokki-gray-text font-semibold">Estoque</span>
             </a>
-            <a href="{{ route('contas.index') }}" class="block bg-white rounded-lg shadow-md p-4 hover:bg-stokki-gray-border transition">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h3 class="text-lg font-bold text-stokki-green-dark">Contas a Receber</h3>
-                        <p class="text-stokki-gray-text text-sm">Histórico de clientes e pagamentos</p>
-                    </div>
-                    <i data-lucide="file-text" class="w-6 h-6 text-stokki-green-dark"></i>
-                </div>
-            </a>
+           <a href="{{ route('contas.index') }}" class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition flex items-center gap-3">
+    <i data-lucide="file-text" class="w-6 h-6 text-stokki-green"></i>
+    <span class="text-stokki-gray-text font-semibold">Contas a Receber</span>
+</a>
+
         </div>
     </main>
 

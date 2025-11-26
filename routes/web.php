@@ -9,6 +9,7 @@ use App\Http\Controllers\EstoqueController;
 use App\Http\Controllers\AcessosController;
 use App\Http\Controllers\ContasController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\ProdutoController; // <-- adicionei aqui
 
 // Página inicial (abre o welcome)
 Route::get('/', function () {
@@ -33,6 +34,9 @@ Route::middleware('auth')->group(function () {
     // Estoque
     Route::get('/estoque', [EstoqueController::class, 'index'])->name('estoque.index');
     Route::post('/estoque', [EstoqueController::class, 'store'])->name('estoque.store');
+
+    // Produtos (rota que estava faltando)
+    Route::get('/produtos', [ProdutoController::class, 'index'])->name('produtos.index');
 
     // Acessos
     Route::get('/acessos', [AcessosController::class, 'index'])->name('acessos.index');

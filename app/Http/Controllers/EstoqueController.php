@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Folder;
 use App\Models\Produto;
-// já deixamos pronto para futura integração com Gmail
-use App\Services\GmailService;
 
 class EstoqueController extends Controller
 {
@@ -17,7 +15,7 @@ class EstoqueController extends Controller
         return view('dashboard.estoque.index', compact('folders'));
     }
 
-    public function store(Request $request, GmailService $gmail)
+    public function store(Request $request)
     {
         if ($request->tipo === 'categoria') {
             // Cria uma nova pasta
@@ -61,14 +59,7 @@ class EstoqueController extends Controller
                 ]);
             }
 
-            // 🚨 Aqui já deixamos pronto: se estoque < 5, envia alerta por Gmail
-            if ($produto->quantidade < 5) {
-                $gmail->sendEmail(
-                    'responsavel@stokki-life.com',
-                    'Estoque baixo - Stokki-Life',
-                    "<p>O produto <strong>{$produto->nome}</strong> está com estoque baixo ({$produto->quantidade} unidades).</p>"
-                );
-            }
+            // 🚨 Se quiser no futuro: aqui pode entrar alerta por e-mail ou WhatsApp
         }
 
         return redirect()->route('estoque.index')->with('success', 'Cadastro realizado com sucesso!');
